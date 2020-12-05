@@ -13,6 +13,40 @@ $.ajax({
     "x-rapidapi-key": "5f62c561bc862ae51929f4974ecf3be8",
     "x-rapidapi-host": "v3.football.api-sports.io",
   },
-})
-  .then((response) => console.log("I am the response: ", response))
-  .catch((err) => console.log);
+}).then((res) => {
+  var matchesList = res.response;
+  console.log(matchesList);
+
+  for (var i = 0; i < matchesList.length; i++) {
+    var fixture = matchesList[i].fixture;
+    console.log(fixture);
+
+    //home and away teams.
+    var homeTeams = matchesList[i].teams.home.name;
+    console.log(homeTeams);
+    var awayTeams = matchesList[i].teams.away.name;
+    console.log(awayTeams);
+    var homeTeamsText = $("<h3>").text(homeTeams);
+    $("<h3>").text(homeTeams);
+    var awayTeamsText = $("<h3>").text(awayTeams);
+
+    //score goals
+    var halfTimeHome = matchesList[i].score.halftime.home;
+    var halfTimeAway = matchesList[i].score.halftime.away;
+    console.log(halfTimeHome);
+    var fullTimeHome = matchesList[i].score.fulltime.home;
+    var fullTimeAway = matchesList[i].score.fulltime.away;
+    console.log(fullTimeHome);
+
+
+
+    $("#main-div").append(homeTeamsText, awayTeamsText);
+
+    //score, goals.
+
+    //venue
+
+    //id for predictions...
+    console.log(fixture.id);
+  }
+});
