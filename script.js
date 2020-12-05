@@ -14,5 +14,5 @@ $.ajax({
     "x-rapidapi-host": "v3.football.api-sports.io",
   },
 })
-  .then((response) => console.log("I am the response: ", response))
+  .then((res) => console.log("I am the res: ", res.response[0].fixture.id))
   .catch((err) => console.log);
