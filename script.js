@@ -64,7 +64,18 @@ $.ajax({
     var clickedElement = $(this);
     var fixtureId = clickedElement.attr("data-fixtureId")
 
-
-
+    $.ajax({
+      url:
+        "https://v3.football.api-sports.io/predictions?fixture=" + fixtureId,
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "249df56945271c12e44e90e5531878ba",
+        "x-rapidapi-host": "v3.football.api-sports.io",
+      },
+    }).then((resp) => {
+      console.log("I am the predictions ajax: ", resp);
   })
-}).catch((err) => console.error("I am the rror: ", err))
+})
+})
+
+
