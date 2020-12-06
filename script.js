@@ -27,46 +27,55 @@ $.ajax({
     var awayTeam = matchesList[i].teams.away.name;
 
     var fixturesDiv = $("<div class='fixture'>");
-    fixturesDiv.attr("data-fixtureId", fixtureId );
+    fixturesDiv.attr("data-fixtureId", fixtureId);
 
     var homeTeamText = $("<h3>").text(homeTeam);
     var awayTeamText = $("<h3>").text(awayTeam);
 
-  
+    $("#main-div").append(fixturesDiv);
 
-    fixturesDiv.append(homeTeamText, awayTeamText)
+    //half-time and full time scores.
+    var halfTimeHome = matchesList[i].score.halftime.home;
+    halfTimeHome = halfTimeHome == null ? "0" : halfTimeHome;
 
-  
-    $("#main-div").append(fixturesDiv)
+    var halfTimeAway = matchesList[i].score.halftime.away;
+    halfTimeAway = halfTimeAway == null ? "0" : halfTimeAway;
 
-    
-    //score goals
-    // var halfTimeHome = matchesList[i].score.halftime.home;
-    // var halfTimeAway = matchesList[i].score.halftime.away;
-    // console.log(halfTimeHome);
-    // var fullTimeHome = matchesList[i].score.fulltime.home;
-    // var fullTimeAway = matchesList[i].score.fulltime.away;
-    // console.log(fullTimeHome);
+    var fullTimeHome = matchesList[i].score.fulltime.home;
+    fullTimeHome = fullTimeHome == null ? "0" : fullTimeHome;
+
+    var fullTimeAway = matchesList[i].score.fulltime.away;
+    fullTimeAway = fullTimeAway == null ? "0" : fullTimeAway;
+
+    // goals.
+    var homeGoals = matchesList[i].goals.home;
+    homeGoals = homeGoals == null ? "0" : homeGoals;
+    var awayGoals = matchesList[i].goals.away;
+    awayGoals = awayGoals == null ? "0" : awayGoals;
+    console.log(awayGoals);
+
+    var homeGoalsText = $("<h3>").text(homeGoals);
+    var awayGoalsText = $("<h3>").text(awayGoals);
+
+    //venue 
+    var venue = matchesList[i].fixture.venue.name;
+    console.log(venue);
 
 
 
-    // s
-
-    //score, goals.
+    fixturesDiv.append(homeTeamText, awayTeamText, homeGoalsText, awayGoalsText);
 
     //venue
-
-    //id for predictions...
-    console.log(fixture.id);
   }
 
-  $(".fixture").click(function(){
+  ////////////////////////////////////////////////////////////
+
+  $(".fixture").click(function () {
     var clickedElement = $(this);
-    var fixtureId = clickedElement.attr("data-fixtureId")
+    var fixtureId = clickedElement.attr("data-fixtureId");
 
     $.ajax({
-      url:
-        "https://v3.football.api-sports.io/predictions?fixture=" + fixtureId,
+      url: "https://v3.football.api-sports.io/predictions?fixture=" + fixtureId,
       method: "GET",
       headers: {
         "x-rapidapi-key": "249df56945271c12e44e90e5531878ba",
@@ -74,8 +83,6 @@ $.ajax({
       },
     }).then((resp) => {
       console.log("I am the predictions ajax: ", resp);
-  })
-})
-})
-
-
+    });
+  });
+});
