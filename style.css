@@ -2,7 +2,17 @@
     border: 2px solid black;
     margin-bottom: 30px;
     width: 80%;
-    height: 300px;
-    text-align: center;
-    justify-content: center;
+    height: 300px; 
+}
+
+#image-home {
+    height: 50px;
+    width: 50px;
+
+}
+
+#image-away {
+    height: 50px;
+    width: 50px;
+
 }

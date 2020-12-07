@@ -67,15 +67,23 @@ $.ajax({
     var awayLogo = matchesList[i].teams.away.logo;
 
     var homeLogoImage = $("<img>").attr("src", homeLogo);
+    homeLogoImage.attr("id", "image-home");
     var awayLogoImage = $("<img>").attr("src", awayLogo)
+    awayLogoImage.attr("id", "image-away");
 
     //venue 
     var venue = matchesList[i].fixture.venue.name;
     console.log(venue);
 
+    var homeTeamDiv = $("<div>");
+    homeTeamDiv.append(homeTeamText, homeLogoImage);
+    var awayTeamDiv = $("<div>");
+    awayTeamDiv.append(awayTeamText, awayLogoImage);
 
 
-    fixturesDiv.append(homeTeamText, awayTeamText, homeGoalsText, awayGoalsText, homeLogoImage, awayLogoImage);
+
+
+    fixturesDiv.append(homeTeamDiv, awayTeamDiv, homeGoalsText, awayGoalsText);
 
     $("#main-div").append(fixturesDiv);
 
