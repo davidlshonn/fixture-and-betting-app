@@ -1,16 +1,21 @@
 var leagueId = 39; // English Premier League
 
-var todaysDate = moment().format("YYYY-MM-DD");
+var todaysDate = moment();
+var weekStart = todaysDate.clone().startOf("isoweek");
+
+for(var i = 0; i <= 6; i++) {
+var weekResults = moment(weekStart).add(i, 'days').format("YYYY-MM-DD");
+}
 
 $.ajax({
   url:
     "https://v3.football.api-sports.io/fixtures/?season=2020&league=" +
     leagueId +
     "&date=" +
-    todaysDate,
+  weekResults,
   method: "GET",
   headers: {
-    "x-rapidapi-key": "249df56945271c12e44e90e5531878ba",
+    "x-rapidapi-key": "67f27e4f20f674f5d4d4d49ee4d1642e",
     "x-rapidapi-host": "v3.football.api-sports.io",
   },
 }).then((res) => {
@@ -28,11 +33,12 @@ $.ajax({
 
     var fixturesDiv = $("<div class='fixture'>");
     fixturesDiv.attr("data-fixtureId", fixtureId);
+    fixturesDiv.attr("id", "fixture-div");
 
     var homeTeamText = $("<h3>").text(homeTeam);
     var awayTeamText = $("<h3>").text(awayTeam);
 
-    $("#main-div").append(fixturesDiv);
+    
 
     //half-time and full time scores.
     var halfTimeHome = matchesList[i].score.halftime.home;
@@ -57,13 +63,21 @@ $.ajax({
     var homeGoalsText = $("<h3>").text(homeGoals);
     var awayGoalsText = $("<h3>").text(awayGoals);
 
+    var homeLogo = matchesList[i].teams.home.logo;
+    var awayLogo = matchesList[i].teams.away.logo;
+
+    var homeLogoImage = $("<img>").attr("src", homeLogo);
+    var awayLogoImage = $("<img>").attr("src", awayLogo)
+
     //venue 
     var venue = matchesList[i].fixture.venue.name;
     console.log(venue);
 
 
 
-    fixturesDiv.append(homeTeamText, awayTeamText, homeGoalsText, awayGoalsText);
+    fixturesDiv.append(homeTeamText, awayTeamText, homeGoalsText, awayGoalsText, homeLogoImage, awayLogoImage);
+
+    $("#main-div").append(fixturesDiv);
 
     //venue
   }
@@ -78,7 +92,7 @@ $.ajax({
       url: "https://v3.football.api-sports.io/predictions?fixture=" + fixtureId,
       method: "GET",
       headers: {
-        "x-rapidapi-key": "249df56945271c12e44e90e5531878ba",
+        "x-rapidapi-key": "67f27e4f20f674f5d4d4d49ee4d1642e",
         "x-rapidapi-host": "v3.football.api-sports.io",
       },
     }).then((resp) => {
