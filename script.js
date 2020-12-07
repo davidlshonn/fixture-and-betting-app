@@ -76,9 +76,12 @@ $.ajax({
     console.log(venue);
 
     var homeTeamDiv = $("<div>");
-    homeTeamDiv.append(homeTeamText, homeLogoImage);
+    homeTeamDiv.attr("id", "home-team");
+    homeTeamDiv.append(homeLogoImage, homeTeamText);
+    
     var awayTeamDiv = $("<div>");
-    awayTeamDiv.append(awayTeamText, awayLogoImage);
+    awayTeamDiv.append(awayLogoImage, awayTeamText);
+    awayTeamDiv.attr("id", "away-team");
 
 
 
