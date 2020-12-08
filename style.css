@@ -1,4 +1,60 @@
 #fixture-div {
+<<<<<<< HEAD
+  margin-bottom: 10px;
+  width: 80%;
+  height: 350px;
+  margin-left: 150px;
+  margin-top: 40px;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgb(105, 105, 105);
+}
+
+.fixture-content {
+  display: inline-block;
+  margin-left: 12rem;
+  margin-top: 70px;
+  justify-content: center;
+  text-align: center;
+}
+
+.info-fixture {
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  right: 31.5rem;
+  top: 14rem;
+}
+
+#image-home {
+  height: 170px;
+  width: 170px;
+}
+
+#image-away {
+  height: 170px;
+  width: 170px;
+}
+
+#central-div {
+  display: flex;
+  font-size: 70px;
+}
+
+#home-goals,
+#away-goals {
+  font-size: 100px;
+}
+
+#league-logo {
+  width: 95px;
+  height: 85px;
+  margin-left: 33px;
+  margin-bottom: 5px;
+  
+}
+
+=======
     border: 2px solid black;
     margin-bottom: 30px;
     width: 80%;
@@ -21,3 +77,4 @@
 #away-team {
   float: right;
 }
+>>>>>>> main
