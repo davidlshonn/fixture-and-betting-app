@@ -31,9 +31,14 @@ $.ajax({
     var homeTeam = matchesList[i].teams.home.name;
     var awayTeam = matchesList[i].teams.away.name;
 
-    var fixturesDiv = $("<div class='fixture'>");
+    var fixturesDiv = $("<div>");
     fixturesDiv.attr("data-fixtureId", fixtureId);
     fixturesDiv.attr("id", "fixture-div");
+    fixturesDiv.addClass("min-w-screen min-h-screen flex items-center justify-center px-5 py-5 mb-4 w-4/5 rounded-lg shadow-2xl place-content-center");
+
+      
+
+
 
     var homeTeamText = $("<h3>").text(homeTeam);
     var awayTeamText = $("<h3>").text(awayTeam);

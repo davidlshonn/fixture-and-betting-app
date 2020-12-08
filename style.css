@@ -1,14 +1,13 @@
-#fixture-div {
+/* #fixture-div {
 
   margin-bottom: 10px;
   width: 80%;
   height: 350px;
-  margin-left: 150px;
   margin-top: 40px;
   display: flex;
   border-radius: 10px;
   box-shadow: 0 0 5px rgb(105, 105, 105);
-}
+} */
 
 .fixture-content {
   display: inline-block;
