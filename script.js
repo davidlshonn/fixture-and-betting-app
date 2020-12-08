@@ -1,13 +1,18 @@
 var leagueId = 39; // English Premier League
 
-var todaysDate = moment().format("YYYY-MM-DD");
+var todaysDate = moment();
+var weekStart = todaysDate.clone().startOf("isoweek");
+
+for (var i = 0; i <= 6; i++) {
+  var weekResults = moment(weekStart).add(i, "days").format("YYYY-MM-DD");
+}
 
 $.ajax({
   url:
     "https://v3.football.api-sports.io/fixtures/?season=2020&league=" +
     leagueId +
     "&date=" +
-    todaysDate,
+    weekResults,
   method: "GET",
   headers: {
     "x-rapidapi-key": "249df56945271c12e44e90e5531878ba",
@@ -28,13 +33,30 @@ $.ajax({
 
     var fixturesDiv = $("<div class='fixture'>");
     fixturesDiv.attr("data-fixtureId", fixtureId);
+    fixturesDiv.attr("id", "fixture-div");
 
     var homeTeamText = $("<h3>").text(homeTeam);
     var awayTeamText = $("<h3>").text(awayTeam);
 
-    $("#main-div").append(fixturesDiv);
+    var homeLogo = matchesList[i].teams.home.logo;
+    var awayLogo = matchesList[i].teams.away.logo;
 
-    //half-time and full time scores.
+    //logo
+    var homeLogoImage = $("<img>").attr("src", homeLogo);
+    homeLogoImage.attr("id", "image-home");
+    var awayLogoImage = $("<img>").attr("src", awayLogo);
+    awayLogoImage.attr("id", "image-away");
+
+    /// Home div on the left to display logo and name, away on left \\\
+    var homeTeamDiv = $("<div class='fixture-content'>");
+    homeTeamDiv.attr("id", "home-team");
+    homeTeamDiv.append(homeLogoImage, homeTeamText);
+
+    var awayTeamDiv = $("<div class='fixture-content'>");
+    awayTeamDiv.append(awayLogoImage, awayTeamText);
+    awayTeamDiv.attr("id", "away-team");
+
+    //half-time and full time scores - to be displayed in the middle of card.
     var halfTimeHome = matchesList[i].score.halftime.home;
     halfTimeHome = halfTimeHome == null ? "0" : halfTimeHome;
 
@@ -56,16 +78,33 @@ $.ajax({
 
     var homeGoalsText = $("<h3>").text(homeGoals);
     var awayGoalsText = $("<h3>").text(awayGoals);
-
-    //venue 
-    var venue = matchesList[i].fixture.venue.name;
-    console.log(venue);
-
-
-
-    fixturesDiv.append(homeTeamText, awayTeamText, homeGoalsText, awayGoalsText);
+    homeGoalsText.attr("id", "home-goals");
+    awayGoalsText.attr("id", "away-goals");
 
     //venue
+    var venue = matchesList[i].fixture.venue.name;
+    var venueText = $("<h5>").text(venue);
+
+    //central div to display goals.
+    var centralDiv = $("<div class='fixture-content'>");
+    centralDiv.attr("id", "central-div");
+    centralDiv.append(homeGoalsText, awayGoalsText);
+
+    //div underneath to display info on match.
+    var infoMatchDiv = $("<div class='info-fixture'>");
+    infoMatchDiv.attr("id", "info-div");
+    var leagueLogo = matchesList[i].league.logo;
+    var leagueLogoImage = $("<img>").attr("src", leagueLogo);
+    leagueLogoImage.attr("id", "league-logo");
+
+    //venue
+    var venue = matchesList[i].fixture.venue.name;
+    var venueText = $("<h5>").text(venue);
+
+    infoMatchDiv.append(leagueLogoImage, venueText);
+
+    fixturesDiv.append(homeTeamDiv, centralDiv, awayTeamDiv, infoMatchDiv);
+    $("#main-div").append(fixturesDiv);
   }
 
   ////////////////////////////////////////////////////////////
