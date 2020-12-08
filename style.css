@@ -1,5 +1,5 @@
 #fixture-div {
-<<<<<<< HEAD
+
   margin-bottom: 10px;
   width: 80%;
   height: 350px;
@@ -54,27 +54,3 @@
   
 }
 
-=======
-    border: 2px solid black;
-    margin-bottom: 30px;
-    width: 80%;
-    height: 500px; 
-    margin-left: 150px;
-}
-
-#image-home {
-    height: 50px;
-    width: 50px;
-
-}
-
-#image-away {
-    height: 50px;
-    width: 50px;
-
-}
-
-#away-team {
-  float: right;
-}
->>>>>>> main
