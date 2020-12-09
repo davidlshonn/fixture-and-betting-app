@@ -15,7 +15,7 @@ $.ajax({
   method: "GET",
   
   headers: {
-    "x-rapidapi-key": "6900acedd89929c212eaceca7fe25140",
+    "x-rapidapi-key": "d773d2cd9ff6e1ef63d84db5508c70c5",
     "x-rapidapi-host": "v3.football.api-sports.io",
   },
 }).then((res) => {
@@ -130,7 +130,7 @@ $.ajax({
       url: "https://v3.football.api-sports.io/predictions?fixture=" + fixtureId,
       method: "GET",
       headers: {
-        "x-rapidapi-key": "6900acedd89929c212eaceca7fe25140",
+        "x-rapidapi-key": "d773d2cd9ff6e1ef63d84db5508c70c5",
         "x-rapidapi-host": "v3.football.api-sports.io",
       },
     }).then((resp) => {
