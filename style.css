@@ -1,3 +1,8 @@
+* {
+  text-align: center;
+}
+
+
 /* #fixture-div {
 
   margin-bottom: 10px;
@@ -9,15 +14,8 @@
   box-shadow: 0 0 5px rgb(105, 105, 105);
 } */
 
-.fixture-content {
-  display: inline-block;
-  margin-left: 12rem;
-  margin-top: 70px;
-  justify-content: center;
-  text-align: center;
-}
 
-.info-fixture {
+/* .info-fixture {
   justify-content: center;
   text-align: center;
   position: relative;
@@ -37,19 +35,50 @@
 
 #central-div {
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 70px;
+  background-color: coral; */
 }
 
-#home-goals,
+/* #home-goals,
 #away-goals {
   font-size: 100px;
+} */
+
+/* .middle-side-div{
+  background-color: aquamarine;
+
+  width: 300px;
+  
 }
 
-#league-logo {
+#left-side-div{
+  background-color: blueviolet;
+  width: 300px;
+} */
+
+/* #league-logo {
   width: 95px;
   height: 85px;
   margin-left: 33px;
   margin-bottom: 5px;
   
-}
+} */
 
+/* .fixture-content {
+    align-content:center;
+} */
+/* 
+h3 {
+  align-self: center;
+} */
+
+/* .fixtures-div {
+  padding: 25%;
+} */
+
+/* #fixture-div {
+  margin-top: 25px;
+  margin-bottom: 12.5px;
+} */
