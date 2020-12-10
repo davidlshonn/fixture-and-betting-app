@@ -1,55 +1,46 @@
-/* #fixture-div {
 
-  margin-bottom: 10px;
-  width: 80%;
-  height: 350px;
-  margin-top: 40px;
-  display: flex;
+#fixture-div {
+  width: 500px;
+  height: 250px;
   border-radius: 10px;
   box-shadow: 0 0 5px rgb(105, 105, 105);
-} */
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 20px;
 
-.fixture-content {
-  display: inline-block;
-  margin-left: 12rem;
-  margin-top: 70px;
-  justify-content: center;
-  text-align: center;
+display: grid;
+grid-template-columns: 33.3% 33.3% 33.3%;
+grid-template-rows: 100%;
+grid-template-areas: 
+"s1 s2 s3"
+}
+#home-team-div { 
+grid-area: s1;
+justify-content: center;
+align-items: center;
+text-align:center;
+background-color: rgb(247, 196, 196);
+}
+#central-div { 
+grid-area: s2;
+background-color: #8bf7a2;
+}
+#away-team-div { 
+grid-area: s3;
+background-color: #eff59c;
+justify-content: center;
+align-items: center;
+text-align:center;
 }
 
-.info-fixture {
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  right: 31.5rem;
-  top: 14rem;
-}
 
-#image-home {
-  height: 170px;
-  width: 170px;
-}
 
-#image-away {
-  height: 170px;
-  width: 170px;
-}
 
-#central-div {
-  display: flex;
-  font-size: 70px;
-}
 
-#home-goals,
-#away-goals {
-  font-size: 100px;
-}
 
-#league-logo {
-  width: 95px;
-  height: 85px;
-  margin-left: 33px;
-  margin-bottom: 5px;
-  
-}
+
+
+
+
+
 
