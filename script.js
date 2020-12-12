@@ -1,17 +1,20 @@
 var leagueId = 39; // English Premier League
+var today = moment().format("YYYY-MM-DD");
+
 var todaysDate = moment();
+console.log(todaysDate);
 var weekStart = todaysDate.clone().startOf("isoweek");
 for (var i = 0; i <= 6; i++) {
   var weekResults = moment(weekStart).add(i, "days").format("YYYY-MM-DD");
+  console.log(weekResults);
 }
 $.ajax({
   url:
     "https://v3.football.api-sports.io/fixtures/?season=2020&league=" +
     leagueId +
     "&date=" +
-    weekResults,
-  weekResults,
-  method: "GET",
+    today,
+   method: "GET",
   headers: {
     "x-rapidapi-key": "67f27e4f20f674f5d4d4d49ee4d1642e",
     "x-rapidapi-host": "v3.football.api-sports.io",
@@ -72,18 +75,16 @@ $.ajax({
     awayGoals = awayGoals == null ? "0" : awayGoals;
     console.log(awayGoals);
     var homeGoalsText = $("<h3>").text(homeGoals);
+    var middleSymbol = $("<button type='button'><i id='football-icon' class='far fa-futbol'></i></button>");
     var awayGoalsText = $("<h3>").text(awayGoals);
     homeGoalsText.attr("id", "home-goals");
     awayGoalsText.attr("id", "away-goals");
-    homeGoalsText.addClass("text-4xl");
-    awayGoalsText.addClass("text-4xl");
+    homeGoalsText.addClass("text-7xl");
+    awayGoalsText.addClass("text-7xl");
     var goalsDiv = $("<div>")
-    goalsDiv.append(homeGoalsText, awayGoalsText);
+    goalsDiv.append(homeGoalsText, middleSymbol, awayGoalsText);
     goalsDiv.attr("id", "goals-div");
-    goalsDiv.addClass("content-center place-self-center")
-    //venue
-    var venue = matchesList[i].fixture.venue.name;
-    var venueText = $("<h5>").text(venue);
+    goalsDiv.addClass("content-center place-self-center ")
     //central div to display goals.
     var centralDiv = $("<div class='fixture-content'>");
     centralDiv.attr("id", "central-div");
@@ -98,19 +99,39 @@ $.ajax({
     //div underneath to display info on match.
     var infoMatchDiv = $("<div class='info-fixture'>");
     infoMatchDiv.attr("id", "info-div");
+
+    //league---logo
     var leagueLogo = matchesList[i].league.logo;
     var leagueLogoImage = $("<img>").attr("src", leagueLogo);
     leagueLogoImage.attr("id", "league-logo");
     //venue
     var venue = matchesList[i].fixture.venue.name;
     var venueText = $("<h5>").text(venue);
-    venueText.addClass("h-24 w-44 font-medium text-xs pt-12 ");
-    infoMatchDiv.append(venueText, buttonBettings);
+    venueText.addClass("h-24 w-44 font-medium text-xs pt-12 pr-10");
+
+    //match date (to be append to cards and betting pop-up)
+    var matchDate = matchesList[i].fixture.date;
+    var matchDateSplit = matchDate.substr(0, 10);
+    var matchDateSplitTwo = matchDate.substr(11, 15);
+    var matchDateThree = matchDateSplitTwo.substr(0, 5);
+    
+    dateDiv = $("<div>").attr("id", "date-div");
+    dateDiv.append($("<h6>").text(matchDateThree));
+    dateDiv.append($("<h6>").text(matchDateSplit));
+
+    //referee >
+    // var referee = matchesList[i].fixture.referee;
+    // var refereeText = $("<h5").text(referee);
+
+    infoMatchDiv.append(dateDiv, venueText, buttonBettings);
     centralDiv.append(infoMatchDiv);
     fixturesDiv.append(homeTeamDiv, centralDiv, awayTeamDiv);
     $("#main-div").append(fixturesDiv);
   }
+
   ////////////////////////////////////////////////////////////
+
+  /////////////////////////////predictions from same api as first.
   // $(".fixture-div").click(function () {
   //   var clickedElement = $(this);
   //   var fixtureId = clickedElement.attr("data-fixtureId");
@@ -145,7 +166,12 @@ $.ajax({
         ? "Brighton Hove Albion"
         : homeTeamBettings;
     homeTeamBettings =
-      homeTeamBettings == "Leicester" ? "Leicester City" : homeTeamBettings;
+      homeTeamBettings == "Wolves" ? "Wolverhampton Wanderers" : homeTeamBettings;
+      homeTeamBettings = homeTeamBettings == "Newcastle" ? "Newcastle United" : homeTeamBettings;
+      homeTeamBettings = homeTeamBettings == "West Brom" ? "West Bromwich Albion" : homeTeamBettings;
+
+
+
     //when button is pressed it gets Central Div (parent element) then the next sibling (Away Div) then the name of team
     var awayTeamBettings =
       event.target.parentElement.parentElement.nextSibling.children[1].innerText;
@@ -162,6 +188,9 @@ $.ajax({
         : awayTeamBettings;
     awayTeamBettings =
       awayTeamBettings == "Leicester" ? "Leicester City" : awayTeamBettings;
+      awayTeamBettings = awayTeamBettings == "Wolves" ? "Wolverhampton Wanderers" : awayTeamBettings;
+    awayTeamBettings = awayTeamBettings == "Newcastle" ? "Newcastle United" : awayTeamBettings;
+    awayTeamBettings = awayTeamBettings == "West Brom" ? "West Bromwich Albion" : awayTeamBettings;
     $.ajax({
       url:
         "https://api.the-odds-api.com/v3/odds/?sport=soccer_epl&region=uk&apiKey=320677a935e3705075dd09ae22ed3fe4",
@@ -225,6 +254,9 @@ $.ajax({
               "Bettings Card: " + homeTeamBettings + " VS " + awayTeamBettings
             )
             .addClass("bettings-card-heading");
+            dateDivTwo = dateDiv;
+            dateDivTwo.attr("id", "date-div-two")
+
           modalTop.append(
             bettingsSitesHeading,
             homeHeading,
@@ -234,8 +266,9 @@ $.ajax({
           var removeBtn = $(
             "<button class='btn btn-danger' type='button'><i id='remove-btn' class='far fa-times'></i></button>"
           );
+
           removeBtn.click(removeBettings);
-          contentsModal.append(cardHeading, modalTop, removeBtn);
+          contentsModal.append(cardHeading, dateDivTwo, modalTop, removeBtn);
           backgroundModal.append(contentsModal);
           $("#main").append(backgroundModal);
           // $(".back-div").append(
