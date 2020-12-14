@@ -1,19 +1,39 @@
 var leagueId = 39; // English Premier League
-var today = moment().format("YYYY-MM-DD");
 
-var todaysDate = moment();
-console.log(todaysDate);
-var weekStart = todaysDate.clone().startOf("isoweek");
-for (var i = 0; i <= 6; i++) {
-  var weekResults = moment(weekStart).add(i, "days").format("YYYY-MM-DD");
-  console.log(weekResults);
+// var todaysDate = moment();
+// console.log(todaysDate);
+// var weekStart = todaysDate.clone().startOf("isoweek");
+// for (var i = 0; i <= 6; i++) {
+//   var weekResults = moment(weekStart).add(i, "days").format("YYYY-MM-DD");
+//   console.log(weekResults);
+// }
+
+// Test values
+let start = moment();
+let end = moment().add(45 , 'd');
+
+var arr = [];
+// Get "next" monday
+let tmp = start.clone().day(6);
+if( tmp.isAfter(start, 'd') ){
+  arr.push(tmp.format('YYYY-MM-DD'));
 }
+while( tmp.isBefore(end) ){
+  tmp.add(7, 'days');
+  arr.push(tmp.format('YYYY-MM-DD'));
+}
+console.log(arr);
+
+console.log(arr[0]);
+
+var nextSaturday = arr[0];
+
 $.ajax({
   url:
     "https://v3.football.api-sports.io/fixtures/?season=2020&league=" +
     leagueId +
     "&date=" +
-    today,
+    nextSaturday,
    method: "GET",
   headers: {
     "x-rapidapi-key": "67f27e4f20f674f5d4d4d49ee4d1642e",
@@ -288,3 +308,30 @@ $.ajax({
 function removeBettings() {
   $(".bg-modal").remove();
 }
+
+$(".block").on("click", function () {
+  $("#mobile-menu").removeClass('hidden');
+    $("#mobile-menu").addClass('block');
+
+    $("#menu").removeClass('hidden');
+    $("#menu").addClass('block');
+
+    $("#x-menu").removeClass('block');
+    $("#x-menu").addClass('hidden');
+})
+
+$("#mobile-menu").on("click", function () {
+
+  $("#menu").removeClass('block');
+    $("#menu").addClass('hidden');
+
+    $("#mobile-menu").removeClass('block');
+    $("#mobile-menu").addClass('hidden');
+
+    $("#x-menu").removeClass('hidden');
+    $("#x-menu").addClass('block');
+})
+
+
+
+
