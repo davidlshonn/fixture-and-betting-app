@@ -11,6 +11,6 @@ In this group project, with the combine use of HTML, CSS, Tailwind and JavaScrip
 
 When the user opens the web page, they are presented with the main page that contains the week's football fixtures. In the navigation bar, there's an "About" link that takes the user to separate page that tells a little bit more about the project and its contributors. The user can navigate back to the main page by clicking the "matches" button in the navigation bar. When on the main page, by the click of a button in each fixture's card, the user has the ability to view each fixture's betting odds. 
 
-Hre is the link to the web page
+Here is the link to the web page
 
 https://davidlshonn.github.io/fixture-and-betting-app/
